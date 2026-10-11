@@ -1,0 +1,28 @@
+<div class="page">
+  <h1 class="page-title"><app-icon name="users" /> Browse Artists</h1>
+  <p class="lead">Find artists for your events</p>
+  @if (artists().length) {
+    <div class="grid">
+      @for (artist of artists(); track artist.userId) {
+        <a class="card" [routerLink]="['/artist', artist.userId]">
+          <div class="who">
+            @if (artist.avatarUrl) {
+              <img [src]="artist.avatarUrl" [alt]="artist.fullName">
+            } @else {
+              <div class="avatar">{{ artist.fullName.charAt(0) }}</div>
+            }
+            <div>
+              <strong>{{ artist.fullName }}</strong>
+              <span>{{ artist.genre || 'Artist' }} · {{ followers(artist.followers) }} followers</span>
+            </div>
+          </div>
+          @if (artist.bio) {
+            <p>{{ artist.bio }}</p>
+          }
+        </a>
+      }
+    </div>
+  } @else {
+    <p class="empty">No artists have joined yet.</p>
+  }
+</div>

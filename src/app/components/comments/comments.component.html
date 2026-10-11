@@ -1,0 +1,61 @@
+<section>
+  <h3>
+    <app-icon name="comment" />
+    Comments @if (comments().length) { ({{ comments().length }}) }
+  </h3>
+
+  <div class="composer">
+    <div class="avatar me">{{ guest().fullName.charAt(0) }}</div>
+    <div class="box">
+      @if (replyingTo()) {
+        <p class="replying">
+          Replying to a comment
+          <button type="button" (click)="cancelReply()">Cancel</button>
+        </p>
+      }
+      <div class="entry">
+        <textarea [(ngModel)]="draft" placeholder="Add a comment..."></textarea>
+        <button type="button" class="btn btn-icon" [disabled]="!draft.trim()" (click)="send()" aria-label="Send">
+          <app-icon name="send" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  @if (comments().length === 0) {
+    <p class="empty">No comments yet. Be the first!</p>
+  }
+
+  @for (comment of comments(); track comment.id) {
+    <article>
+      <div class="avatar">{{ initial(comment.userId) }}</div>
+      <div>
+        <header>
+          <strong>{{ name(comment.userId) }}</strong>
+          @if (roleLabel(comment.userId); as role) {
+            <span class="badge">{{ role }}</span>
+          }
+          <span class="ago">{{ ago(comment.createdAt) }}</span>
+        </header>
+        <p>{{ comment.content }}</p>
+        <button type="button" class="link" (click)="reply(comment.id)">Reply</button>
+        @if (comment.replies.length) {
+          <div class="replies">
+            @for (reply of comment.replies; track reply.id) {
+              <article>
+                <div class="avatar">{{ initial(reply.userId) }}</div>
+                <div>
+                  <header>
+                    <strong>{{ name(reply.userId) }}</strong>
+                    <span class="ago">{{ ago(reply.createdAt) }}</span>
+                  </header>
+                  <p>{{ reply.content }}</p>
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </div>
+    </article>
+  }
+</section>

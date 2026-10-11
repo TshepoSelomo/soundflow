@@ -1,0 +1,5 @@
+<div class="stack" aria-live="polite">
+  @for (message of toast.messages(); track message.id) {
+    <p [class]="message.kind">{{ message.text }}</p>
+  }
+</div>

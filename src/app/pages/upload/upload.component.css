@@ -1,0 +1,23 @@
+.page { max-width: 42rem; display: flex; flex-direction: column; gap: 1.25rem; padding-bottom: 2rem; }
+h1 { margin: 0; font-size: 1.875rem; }
+.lead { margin: -0.75rem 0 0.5rem; color: var(--muted); }
+.modes { display: flex; gap: 0.75rem; }
+.drop, .cover {
+  border: 2px dashed var(--border);
+  border-radius: 0.8rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  cursor: pointer;
+  color: var(--muted);
+}
+.drop { padding: 2.5rem 1rem; }
+.drop app-icon { width: 2.5rem; height: 2.5rem; margin-bottom: 0.5rem; }
+.drop strong { color: var(--foreground); }
+.drop input, .cover input { display: none; }
+.file { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; }
+.file app-icon { color: var(--primary); }
+.file span { flex: 1; font-size: 0.875rem; }
+.cover { width: 10rem; height: 10rem; margin-top: 0.35rem; overflow: hidden; }
+.cover img { width: 100%; height: 100%; object-fit: cover; }
+.drop:hover, .cover:hover { border-color: hsl(141 76% 48% / 0.5); }

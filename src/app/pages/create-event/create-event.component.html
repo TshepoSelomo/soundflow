@@ -1,0 +1,65 @@
+<div class="page">
+  <h1>Create Event</h1>
+  <p class="lead">Set up a new music event</p>
+
+  <label class="label">Event Title
+    <input class="input" placeholder="Enter event name" [(ngModel)]="title">
+  </label>
+  <label class="label">Description
+    <textarea class="textarea" placeholder="Describe your event..." [(ngModel)]="description"></textarea>
+  </label>
+  <div class="split">
+    <label class="label"><app-icon name="calendar" /> Date
+      <input class="input" type="date" [(ngModel)]="date">
+    </label>
+    <label class="label"><app-icon name="clock" /> Time
+      <input class="input" type="time" [(ngModel)]="time">
+    </label>
+  </div>
+  <label class="label"><app-icon name="pin" /> Venue
+    <input class="input" placeholder="Event venue" [(ngModel)]="venue">
+  </label>
+
+  <div>
+    <p class="label">Invite Artists</p>
+    <div class="artists">
+      @for (artist of artists(); track artist.userId) {
+        <div class="card person">
+          @if (artist.avatarUrl) {
+            <img [src]="artist.avatarUrl" [alt]="artist.fullName">
+          } @else {
+            <div class="avatar">{{ artist.fullName.charAt(0) }}</div>
+          }
+          <div>
+            <strong>{{ artist.fullName }}</strong>
+            <span>{{ artist.genre || 'Artist' }}</span>
+          </div>
+          @if (isInvited(artist.userId)) {
+            <button type="button" class="btn btn-danger btn-sm" (click)="toggle(artist.userId)">
+              <app-icon name="x" /> Remove
+            </button>
+          } @else {
+            <button type="button" class="btn btn-outline btn-sm invite" (click)="toggle(artist.userId)">
+              <app-icon name="plus" /> Invite
+            </button>
+          }
+        </div>
+      } @empty {
+        <p class="empty">No artists registered yet.</p>
+      }
+    </div>
+  </div>
+
+  <label class="label">Cover Image
+    <span class="cover">
+      <input type="file" accept="image/*" (change)="pickCover($event)">
+      @if (coverUrl(); as url) {
+        <img [src]="url" alt="Cover">
+      } @else {
+        Upload event cover
+      }
+    </span>
+  </label>
+
+  <button type="button" class="btn btn-lg" (click)="create()">Create Event</button>
+</div>

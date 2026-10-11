@@ -1,0 +1,104 @@
+<div class="page">
+  <h1 class="page-title"><app-icon name="search" /> Search</h1>
+  <p class="lead">Look in SoundFlow first. If it is not here, play it from a connected platform.</p>
+
+  <form (submit)="$event.preventDefault(); submit()">
+    <input class="input" name="query" placeholder="Search songs or artists" [(ngModel)]="query">
+    <button type="submit" class="btn" [disabled]="searching()">{{ searching() ? 'Searching' : 'Search' }}</button>
+  </form>
+
+  @if (searched() && !searching()) {
+    <section>
+      <h2>SoundFlow</h2>
+      @if (results().local.length) {
+        <div class="list">
+          @for (track of results().local; track track.id) {
+            <button type="button" class="card row" (click)="play(track)">
+              <ng-container *ngTemplateOutlet="cover; context: { $implicit: track }" />
+            </button>
+          }
+        </div>
+      } @else {
+        <p class="empty">Not in SoundFlow. {{ anyExternal() ? 'Results from other platforms are below.' : 'Add a YouTube, Apple Music, or Spotify key to search other platforms.' }}</p>
+      }
+    </section>
+
+    @if (youtube.enabled) {
+      <section>
+        <h2>YouTube</h2>
+        @if (results().youtube.length) {
+          <div class="list">
+            @for (track of results().youtube; track track.id) {
+              <button type="button" class="card row" (click)="play(track)">
+                <ng-container *ngTemplateOutlet="cover; context: { $implicit: track }" />
+              </button>
+            }
+          </div>
+        } @else {
+          <p class="empty">No YouTube matches.</p>
+        }
+      </section>
+    }
+
+    @if (apple.enabled) {
+      <section>
+        <div class="head">
+          <h2>Apple Music</h2>
+          @if (!apple.connected()) {
+            <button type="button" class="btn btn-outline btn-sm" (click)="connectApple()">Connect Apple Music</button>
+          }
+        </div>
+        <p class="note">Full songs play after you connect an Apple Music subscription.</p>
+        @if (results().apple.length) {
+          <div class="list">
+            @for (track of results().apple; track track.id) {
+              <button type="button" class="card row" (click)="play(track)">
+                <ng-container *ngTemplateOutlet="cover; context: { $implicit: track }" />
+              </button>
+            }
+          </div>
+        } @else {
+          <p class="empty">No Apple Music matches.</p>
+        }
+      </section>
+    }
+
+    @if (spotify.enabled) {
+      <section>
+        <div class="head">
+          <h2>Spotify</h2>
+          @if (!spotify.connected()) {
+            <button type="button" class="btn btn-outline btn-sm" (click)="connectSpotify()">Connect Spotify</button>
+          }
+        </div>
+        <p class="note">Search and full playback need a connected Spotify Premium account.</p>
+        @if (!spotify.connected()) {
+          <p class="empty">Connect Spotify to search its catalog.</p>
+        } @else if (results().spotify.length) {
+          <div class="list">
+            @for (track of results().spotify; track track.id) {
+              <button type="button" class="card row" (click)="play(track)">
+                <ng-container *ngTemplateOutlet="cover; context: { $implicit: track }" />
+              </button>
+            }
+          </div>
+        } @else {
+          <p class="empty">No Spotify matches.</p>
+        }
+      </section>
+    }
+  }
+</div>
+
+<ng-template #cover let-track>
+  @if (track.coverUrl) {
+    <img [src]="track.coverUrl" [alt]="track.title">
+  } @else {
+    <div class="note">♪</div>
+  }
+  <div>
+    <strong>{{ track.title }}</strong>
+    <span>{{ track.artist }} · {{ track.duration }} · {{ sourceLabel(track.source) }}</span>
+  </div>
+  <app-icon name="play" />
+</ng-template>

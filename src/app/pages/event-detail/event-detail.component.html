@@ -1,0 +1,47 @@
+@if (event(); as item) {
+  <div class="page">
+    <header class="hero">
+      @if (item.coverUrl) {
+        <img [src]="item.coverUrl" [alt]="item.title">
+      }
+      <div class="shade"></div>
+      <div class="title">
+        <span class="badge">{{ item.status === 'upcoming' ? 'Upcoming' : 'Cancelled' }}</span>
+        <h1>{{ item.title }}</h1>
+        <p>by {{ organiser() }}</p>
+      </div>
+    </header>
+
+    <div class="facts">
+      <div class="card"><app-icon name="calendar" /><span>Date</span><strong>{{ longDate() }}</strong></div>
+      <div class="card"><app-icon name="clock" /><span>Time</span><strong>{{ item.time }}</strong></div>
+      <div class="card"><app-icon name="pin" /><span>Venue</span><strong>{{ item.venue }}</strong></div>
+      <div class="card"><app-icon name="users" /><span>Artists</span><strong>{{ lineup().length }} performing</strong></div>
+    </div>
+
+    <p class="desc">{{ item.description }}</p>
+
+    @if (lineup().length) {
+      <h2>Performing Artists</h2>
+      <div class="lineup">
+        @for (row of lineup(); track row.id) {
+          <a class="card person" [routerLink]="['/artist', row.artistId]">
+            @if (artistAvatar(row.artistId); as avatar) {
+              <img [src]="avatar" [alt]="artistName(row.artistId)">
+            } @else {
+              <div class="avatar">{{ initial(row.artistId) }}</div>
+            }
+            <div>
+              <strong>{{ artistName(row.artistId) }}</strong>
+              <span>{{ artistGenre(row.artistId) }}</span>
+            </div>
+          </a>
+        }
+      </div>
+    }
+
+    <app-comments [eventId]="item.id" />
+  </div>
+} @else {
+  <p class="empty">Event not found.</p>
+}

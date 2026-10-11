@@ -1,0 +1,50 @@
+<div class="page">
+  <h1 class="page-title"><app-icon name="music" /> My Music</h1>
+  <p class="lead">Manage your uploaded tracks and albums</p>
+
+  <h2>Albums</h2>
+  @if (albums().length) {
+    <div class="albums">
+      @for (album of albums(); track album.id) {
+        <article class="card">
+          @if (album.coverUrl) {
+            <img [src]="album.coverUrl" [alt]="album.title">
+          } @else {
+            <div class="note">♪</div>
+          }
+          <strong>{{ album.title }}</strong>
+          <span>{{ album.year }}</span>
+          <button type="button" class="btn btn-danger btn-sm" (click)="deleteAlbum(album.id)" aria-label="Delete album">
+            <app-icon name="trash" />
+          </button>
+        </article>
+      }
+    </div>
+  } @else {
+    <p class="empty gap">No albums yet.</p>
+  }
+
+  <h2>All Tracks</h2>
+  @if (songs().length) {
+    <div class="tracks">
+      @for (song of songs(); track song.id) {
+        <article class="card track">
+          @if (song.coverUrl) {
+            <img [src]="song.coverUrl" [alt]="song.title">
+          } @else {
+            <div class="thumb">♪</div>
+          }
+          <div>
+            <strong>{{ song.title }}</strong>
+            <span>{{ albumTitle(song.albumId) }}</span>
+          </div>
+          <button type="button" class="btn btn-ghost btn-icon" (click)="deleteSong(song.id)" aria-label="Delete track">
+            <app-icon name="trash" />
+          </button>
+        </article>
+      }
+    </div>
+  } @else {
+    <p class="empty">No tracks yet. Upload your first song!</p>
+  }
+</div>

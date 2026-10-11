@@ -1,0 +1,24 @@
+<div class="page">
+  <h1 class="page-title"><app-icon name="calendar" /> Events</h1>
+  @if (events().length) {
+    <div class="grid">
+      @for (event of events(); track event.id) {
+        <a class="card" [routerLink]="['/event', event.id]">
+          <div class="cover">
+            @if (event.coverUrl) {
+              <img [src]="event.coverUrl" [alt]="event.title">
+            }
+            <p>{{ date(event.date) }} · {{ event.time }}</p>
+          </div>
+          <div class="info">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.venue }}</p>
+            <span>by {{ organiser(event.organiserId) }}</span>
+          </div>
+        </a>
+      }
+    </div>
+  } @else {
+    <p class="empty">No upcoming events.</p>
+  }
+</div>

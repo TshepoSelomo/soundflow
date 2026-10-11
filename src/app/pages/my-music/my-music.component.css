@@ -1,0 +1,19 @@
+.page { padding-bottom: 2rem; }
+h1 app-icon { width: 2rem; height: 2rem; color: var(--primary); }
+.lead { margin: 0 0 2rem; color: var(--muted); }
+h2 { margin: 0 0 1rem; }
+.gap { margin-bottom: 2.5rem; }
+.albums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+.albums .card { padding: 1rem; }
+.albums img, .note { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 0.6rem; margin-bottom: 0.75rem; }
+.note { display: grid; place-items: center; background: var(--secondary); color: var(--muted); font-size: 2rem; }
+.albums strong, .track strong { display: block; font-size: 0.875rem; }
+.albums span, .track span { color: var(--muted); font-size: 0.75rem; }
+.tracks { display: flex; flex-direction: column; gap: 0.5rem; }
+.track { display: flex; align-items: center; gap: 1rem; padding: 0.75rem; }
+.track:hover { background: var(--surface-hover); }
+.track img, .thumb { width: 2.5rem; height: 2.5rem; border-radius: 0.3rem; object-fit: cover; background: var(--secondary); }
+.thumb { display: grid; place-items: center; color: var(--muted); font-size: 0.75rem; }
+.track div { flex: 1; min-width: 0; }
+.track button:hover { color: var(--destructive); }
+@media (max-width: 800px) { .albums { grid-template-columns: 1fr 1fr; } }

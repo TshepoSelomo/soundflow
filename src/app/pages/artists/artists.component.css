@@ -1,0 +1,14 @@
+.page { padding-bottom: 2rem; }
+h1 app-icon { width: 2rem; height: 2rem; color: var(--primary); }
+.lead { margin: 0 0 2rem; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.card { display: block; padding: 1.25rem; text-decoration: none; }
+.card:hover { background: var(--surface-hover); }
+.who { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+img, .avatar { width: 4rem; height: 4rem; border-radius: 999px; object-fit: cover; background: var(--secondary); }
+.avatar { display: grid; place-items: center; font-size: 1.5rem; color: var(--muted); }
+strong, span, p { display: block; }
+span, p { color: var(--muted); }
+span { font-size: 0.75rem; }
+p { margin: 0; font-size: 0.875rem; }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }

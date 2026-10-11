@@ -1,0 +1,34 @@
+<div class="page">
+  <h1>Settings</h1>
+
+  <section>
+    <h2><app-icon name="user" /> Profile</h2>
+    <label class="label">Display Name
+      <input class="input" [(ngModel)]="name">
+    </label>
+    <label class="label">Email
+      <input class="input" [value]="guest().email" disabled>
+    </label>
+    <button type="button" class="btn" (click)="save()">Save Changes</button>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2><app-icon name="lock" /> Security</h2>
+    <label class="label">New Password
+      <input class="input" type="password" [(ngModel)]="password">
+    </label>
+    <button type="button" class="btn btn-outline" (click)="changePassword()">Change Password</button>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2 class="danger">Danger Zone</h2>
+    <p>Once you delete your account, there is no going back. Please be certain.</p>
+    <button type="button" class="btn btn-danger" (click)="deleteAccount()">
+      <app-icon name="trash" /> Delete Account
+    </button>
+  </section>
+</div>

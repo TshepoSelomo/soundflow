@@ -1,0 +1,4 @@
+.wrap { min-height: 60vh; display: grid; place-items: center; align-content: center; text-align: center; }
+h1 { margin: 0; font-size: 2.5rem; }
+p { color: var(--muted); font-size: 1.25rem; }
+a { color: var(--primary); }

@@ -1,0 +1,32 @@
+<div class="page">
+  <h1 class="page-title"><app-icon name="calendar" /> My Calendar</h1>
+  <p class="lead">Your upcoming performances</p>
+  @if (rows().length) {
+    <div class="list">
+      @for (row of rows(); track row.id) {
+        @if (eventFor(row.eventId); as event) {
+          <article class="card">
+            <div class="date">
+              <strong>{{ day(event.date) }}</strong>
+              <span>{{ month(event.date) }}</span>
+              <span>{{ year(event.date) }}</span>
+            </div>
+            <div>
+              <header>
+                <h3>{{ event.title }}</h3>
+                <span class="badge">Confirmed</span>
+              </header>
+              <p class="meta">
+                <span><app-icon name="clock" /> {{ event.time }}</span>
+                <span><app-icon name="pin" /> {{ event.venue }}</span>
+              </p>
+              <p class="desc">{{ event.description }}</p>
+            </div>
+          </article>
+        }
+      }
+    </div>
+  } @else {
+    <p class="empty">No upcoming performances. Accept invitations to see them here.</p>
+  }
+</div>

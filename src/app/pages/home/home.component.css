@@ -1,0 +1,54 @@
+.page { display: flex; flex-direction: column; gap: 2.5rem; padding-bottom: 2rem; }
+h1 { margin: 0 0 1.5rem; font-size: 1.875rem; }
+
+.albums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.album {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: hsl(0 0% 15% / 0.5);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  text-decoration: none;
+}
+.album:hover { background: var(--secondary); }
+.album img, .album .note { width: 4rem; height: 4rem; object-fit: cover; }
+.album .note { display: grid; place-items: center; background: var(--secondary); color: var(--muted); }
+.album span { font-weight: 600; font-size: 0.875rem; }
+.play { margin-left: auto; margin-right: 0.75rem; opacity: 0; box-shadow: 0 8px 20px rgb(0 0 0 / 0.35); }
+.album:hover .play { opacity: 1; }
+
+.head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.head a { color: var(--muted); text-decoration: none; font-size: 0.875rem; }
+.head a:hover { color: var(--primary); }
+
+.artists { display: flex; gap: 1.25rem; overflow-x: auto; padding-bottom: 0.5rem; }
+.artists a { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; min-width: 8.75rem; text-decoration: none; }
+.avatar { width: 9rem; height: 9rem; border-radius: 999px; overflow: hidden; background: var(--secondary); box-shadow: 0 10px 24px rgb(0 0 0 / 0.35); }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar span { display: grid; place-items: center; height: 100%; font-size: 2.5rem; color: var(--muted); }
+.artists strong { font-size: 0.875rem; }
+.artists span { font-size: 0.75rem; color: var(--muted); }
+
+.events { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.event { overflow: hidden; text-decoration: none; display: block; }
+.event:hover { background: var(--surface-hover); }
+.cover { position: relative; height: 10rem; background: var(--secondary); }
+.cover img { width: 100%; height: 100%; object-fit: cover; }
+.cover p {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  margin: 0;
+  padding: 1rem;
+  background: linear-gradient(transparent, var(--card));
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.info { padding: 1rem; }
+.info h3 { margin: 0 0 0.25rem; font-size: 0.875rem; }
+.info span { color: var(--muted); font-size: 0.75rem; }
+
+@media (max-width: 900px) {
+  .albums, .events { grid-template-columns: 1fr; }
+}

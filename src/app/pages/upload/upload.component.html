@@ -1,0 +1,57 @@
+<div class="page">
+  <h1>Upload Music</h1>
+  <p class="lead">Share your music with the world</p>
+
+  <div class="modes">
+    <button type="button" class="btn" [class.btn-outline]="albumMode" (click)="albumMode = false">Single Track</button>
+    <button type="button" class="btn" [class.btn-outline]="!albumMode" (click)="albumMode = true">Album</button>
+  </div>
+
+  @if (albumMode) {
+    <label class="label">Album Title
+      <input class="input" placeholder="Enter album title" [(ngModel)]="albumTitle">
+    </label>
+  }
+
+  <label class="label">Song Title
+    <input class="input" placeholder="Enter song title" [(ngModel)]="title">
+  </label>
+
+  <label class="label">Description
+    <textarea class="textarea" placeholder="Tell listeners about this track..." [(ngModel)]="description"></textarea>
+  </label>
+
+  <label class="drop">
+    <input type="file" accept="audio/*" (change)="pickAudio($event)">
+    <app-icon name="upload" />
+    @if (audioName(); as name) {
+      <strong>{{ name }}</strong>
+    } @else {
+      <strong>Click to select audio file</strong>
+      <span>MP3, WAV, FLAC up to 50MB</span>
+    }
+  </label>
+
+  @if (audioName(); as name) {
+    <div class="file card">
+      <app-icon name="music" />
+      <span>{{ name }}</span>
+      <button type="button" class="btn btn-ghost btn-icon" (click)="clearAudio()" aria-label="Remove">
+        <app-icon name="x" />
+      </button>
+    </div>
+  }
+
+  <label class="label">Cover Art
+    <span class="cover">
+      <input type="file" accept="image/*" (change)="pickCover($event)">
+      @if (coverUrl(); as url) {
+        <img [src]="url" alt="Cover">
+      } @else {
+        Upload image
+      }
+    </span>
+  </label>
+
+  <button type="button" class="btn btn-lg" (click)="upload()">Upload</button>
+</div>

@@ -1,0 +1,13 @@
+.page { padding-bottom: 2rem; }
+h1 app-icon { width: 2rem; height: 2rem; color: var(--primary); }
+.lead { margin: 0 0 2rem; color: var(--muted); }
+.list { display: flex; flex-direction: column; gap: 1rem; }
+.card { display: flex; gap: 1.5rem; padding: 1.25rem; }
+.date { min-width: 3.75rem; text-align: center; }
+.date strong { display: block; font-size: 1.875rem; color: var(--primary); }
+.date span { display: block; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; }
+header { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+h3 { margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--muted); font-size: 0.875rem; }
+.meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.desc { color: var(--muted); font-size: 0.875rem; }

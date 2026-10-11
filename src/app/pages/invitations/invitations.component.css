@@ -1,0 +1,12 @@
+.page { padding-bottom: 2rem; }
+h1 { margin: 0; font-size: 1.875rem; }
+.lead { margin: 0.35rem 0 2rem; color: var(--muted); }
+.list { display: flex; flex-direction: column; gap: 1rem; }
+.card { padding: 1.25rem; }
+header { display: flex; justify-content: space-between; gap: 1rem; }
+h3 { margin: 0; }
+header p, .meta { color: var(--muted); font-size: 0.875rem; }
+.wait { background: hsl(141 76% 48% / 0.1); }
+.meta { display: flex; flex-wrap: wrap; gap: 1rem; }
+.meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.actions { display: flex; gap: 0.75rem; }

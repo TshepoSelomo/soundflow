@@ -1,0 +1,21 @@
+<div class="row">
+  <span class="index">{{ index() + 1 }}</span>
+  <button type="button" class="play" (click)="play()" aria-label="Play">
+    <app-icon name="play" />
+  </button>
+  @if (song().coverUrl) {
+    <img [src]="song().coverUrl" [alt]="song().title">
+  } @else {
+    <div class="note">♪</div>
+  }
+  <div class="title">
+    <p>{{ song().title }}</p>
+    <span>{{ artistName() }}</span>
+  </div>
+  <span class="album">{{ albumName() }}</span>
+  <span class="plays">{{ plays() }}</span>
+  <button type="button" class="icon" [class.on]="liked()" (click)="like()" aria-label="Like">
+    <app-icon name="heart" />
+  </button>
+  <span class="time">{{ song().duration }}</span>
+</div>

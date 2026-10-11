@@ -1,0 +1,61 @@
+<div class="bar">
+  <div class="track">
+    <div #ytHost class="yt" [class.show]="player.external()?.source === 'youtube'"></div>
+    @if (player.external(); as track) {
+      @if (track.source !== 'youtube') {
+        @if (track.coverUrl) {
+          <img [src]="track.coverUrl" [alt]="track.title">
+        } @else {
+          <div class="note">♪</div>
+        }
+      }
+      <div class="meta">
+        <p>{{ track.title }}</p>
+        <span>{{ track.artist }} · {{ sourceLabel(track.source) }}</span>
+      </div>
+    } @else if (player.current(); as song) {
+      @if (song.coverUrl) {
+        <img [src]="song.coverUrl" [alt]="song.title">
+      } @else {
+        <div class="note">♪</div>
+      }
+      <div class="meta">
+        <p>{{ song.title }}</p>
+        <span>{{ artistName() }} · SoundFlow</span>
+      </div>
+    } @else {
+      <div class="note">♪</div>
+      <p class="idle">No song playing</p>
+    }
+  </div>
+
+  <div class="controls">
+    <div class="buttons">
+      <button type="button" class="ghost" [class.on]="player.shuffle()" (click)="player.toggleShuffle()" aria-label="Shuffle">
+        <app-icon name="shuffle" />
+      </button>
+      <button type="button" class="ghost" (click)="player.previous()" aria-label="Previous">
+        <app-icon name="prev" />
+      </button>
+      <button type="button" class="play" (click)="player.toggle()" aria-label="Play">
+        <app-icon [name]="player.playing() ? 'pause' : 'play'" />
+      </button>
+      <button type="button" class="ghost" (click)="player.next()" aria-label="Next">
+        <app-icon name="next" />
+      </button>
+      <button type="button" class="ghost" [class.on]="player.repeat()" (click)="player.toggleRepeat()" aria-label="Repeat">
+        <app-icon name="repeat" />
+      </button>
+    </div>
+    <div class="seek">
+      <span>{{ clock(player.progress()) }}</span>
+      <input type="range" min="0" [max]="player.duration() || 100" [value]="player.progress()" (input)="onSeek($event)">
+      <span>{{ clock(player.duration()) }}</span>
+    </div>
+  </div>
+
+  <div class="volume">
+    <app-icon name="volume" />
+    <input type="range" min="0" max="100" [value]="player.volume()" (input)="onVolume($event)" aria-label="Volume">
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.shell {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+main {
+  margin-left: 16rem;
+  margin-bottom: 5rem;
+  padding: 1.5rem;
+  min-height: 100vh;
+}

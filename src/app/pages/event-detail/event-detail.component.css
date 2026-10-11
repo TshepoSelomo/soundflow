@@ -1,0 +1,31 @@
+.page { padding-bottom: 2rem; }
+.hero {
+  position: relative;
+  height: 20rem;
+  margin: -1.5rem -1.5rem 1.5rem;
+  overflow: hidden;
+  border-radius: 0 0 1rem 1rem;
+  background: var(--secondary);
+}
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.shade { position: absolute; inset: 0; background: linear-gradient(transparent, hsl(0 0% 7% / 0.65), var(--background)); }
+.title { position: absolute; left: 1.5rem; bottom: 1.5rem; }
+.title h1 { margin: 0.4rem 0 0; font-size: 2.4rem; }
+.title p { margin: 0.25rem 0 0; color: var(--muted); }
+.badge { margin-bottom: 0.4rem; }
+
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+.facts .card { padding: 1rem; }
+.facts app-icon { color: var(--primary); width: 1.25rem; height: 1.25rem; }
+.facts span { display: block; margin-top: 0.4rem; color: var(--muted); font-size: 0.75rem; }
+.facts strong { display: block; margin-top: 0.15rem; font-size: 0.875rem; }
+.desc { color: var(--muted); margin: 0 0 2rem; }
+h2 { margin: 0 0 1rem; }
+.lineup { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+.person { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem 0.75rem 0.75rem; text-decoration: none; }
+.person:hover { background: var(--surface-hover); }
+.person img, .avatar { width: 3rem; height: 3rem; border-radius: 999px; object-fit: cover; background: var(--secondary); }
+.avatar { display: grid; place-items: center; color: var(--muted); }
+.person strong, .person span { display: block; }
+.person span { color: var(--muted); font-size: 0.75rem; }
+@media (max-width: 800px) { .facts { grid-template-columns: 1fr 1fr; } .hero { height: 16rem; } }

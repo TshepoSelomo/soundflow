@@ -1,0 +1,64 @@
+@if (artist(); as person) {
+  <div class="page">
+    <header class="hero">
+      @if (person.avatarUrl) {
+        <img [src]="person.avatarUrl" [alt]="person.fullName">
+      } @else {
+        <div class="fallback">{{ person.fullName.charAt(0) }}</div>
+      }
+      <div class="shade"></div>
+      <div class="title">
+        <span class="badge">{{ person.genre || 'Artist' }}</span>
+        <h1>{{ person.fullName }}</h1>
+        <p>{{ followers() }} followers</p>
+      </div>
+    </header>
+
+    <div class="actions">
+      <button type="button" class="btn play" (click)="play()"><app-icon name="play" /> Play</button>
+      @if (guest().userId !== person.userId) {
+        <button type="button" class="btn btn-outline round" (click)="follow()">
+          <app-icon [name]="following() ? 'check' : 'plus'" />
+          {{ following() ? 'Following' : 'Follow' }}
+        </button>
+      }
+    </div>
+
+    @if (person.bio) {
+      <p class="bio">{{ person.bio }}</p>
+    }
+
+    @if (songs().length) {
+      <h2>Popular Songs</h2>
+      <div class="songs">
+        @for (song of songs(); track song.id; let i = $index) {
+          <app-song-row [song]="song" [index]="i" />
+        }
+      </div>
+    }
+
+    @if (shows().length) {
+      <h2 class="shows"><app-icon name="calendar" /> Upcoming Performances</h2>
+      <div class="list">
+        @for (row of shows(); track row.id) {
+          @if (eventFor(row.eventId); as event) {
+            <article class="card show">
+              <div class="date">
+                <strong>{{ day(event.date) }}</strong>
+                <span>{{ month(event.date) }}</span>
+              </div>
+              <div>
+                <p>{{ event.title }}</p>
+                <span>{{ event.venue }} · {{ event.time }}</span>
+              </div>
+            </article>
+          }
+        }
+      </div>
+    }
+
+    <app-comments [artistId]="person.userId" />
+  </div>
+} @else {
+  <p class="empty">Artist not found.</p>
+}

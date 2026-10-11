@@ -1,0 +1,35 @@
+<div class="page">
+  <h1>Event Invitations</h1>
+  <p class="lead">Accept or decline invitations from event organisers</p>
+  @if (rows().length) {
+    <div class="list">
+      @for (row of rows(); track row.id) {
+        @if (eventFor(row.eventId); as event) {
+          <article class="card">
+            <header>
+              <div>
+                <h3>{{ event.title }}</h3>
+                <p>From: {{ fromName(event.organiserId) }}</p>
+              </div>
+              <span class="badge wait">Pending</span>
+            </header>
+            <p class="meta">
+              <span><app-icon name="calendar" /> {{ date(event.date) }}</span>
+              <span><app-icon name="pin" /> {{ event.venue }}</span>
+            </p>
+            <div class="actions">
+              <button type="button" class="btn" (click)="respond(row.id, 'accepted')">
+                <app-icon name="check" /> Accept
+              </button>
+              <button type="button" class="btn btn-danger" (click)="respond(row.id, 'declined')">
+                <app-icon name="x" /> Decline
+              </button>
+            </div>
+          </article>
+        }
+      }
+    </div>
+  } @else {
+    <p class="empty">No pending invitations.</p>
+  }
+</div>

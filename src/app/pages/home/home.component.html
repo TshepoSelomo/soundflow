@@ -1,0 +1,77 @@
+<div class="page">
+  <section>
+    <h1>Good evening</h1>
+    @if (albums().length) {
+      <div class="albums">
+        @for (album of albums(); track album.id) {
+          <a class="album" [routerLink]="['/artist', album.artistId]">
+            @if (album.coverUrl) {
+              <img [src]="album.coverUrl" [alt]="album.title">
+            } @else {
+              <div class="note">♪</div>
+            }
+            <span>{{ album.title }}</span>
+            <button type="button" class="btn btn-icon play" (click)="playAlbum(album.id, $event)" aria-label="Play">
+              <app-icon name="play" />
+            </button>
+          </a>
+        }
+      </div>
+    } @else {
+      <p class="empty">No albums yet. Artists can upload music to get started!</p>
+    }
+  </section>
+
+  <section>
+    <div class="head">
+      <h2 class="section-title">Artists</h2>
+      <a routerLink="/artists">See all</a>
+    </div>
+    @if (artists().length) {
+      <div class="artists">
+        @for (artist of artists(); track artist.userId) {
+          <a [routerLink]="['/artist', artist.userId]">
+            <div class="avatar">
+              @if (artist.avatarUrl) {
+                <img [src]="artist.avatarUrl" [alt]="artist.fullName">
+              } @else {
+                <span>{{ artist.fullName.charAt(0) }}</span>
+              }
+            </div>
+            <strong>{{ artist.fullName }}</strong>
+            <span>{{ artist.genre || 'Artist' }}</span>
+          </a>
+        }
+      </div>
+    } @else {
+      <p class="empty">No artists have joined yet.</p>
+    }
+  </section>
+
+  <section>
+    <div class="head">
+      <h2 class="section-title">Upcoming Events</h2>
+      <a routerLink="/events">See all</a>
+    </div>
+    @if (events().length) {
+      <div class="events">
+        @for (event of events(); track event.id) {
+          <a class="card event" [routerLink]="['/event', event.id]">
+            <div class="cover">
+              @if (event.coverUrl) {
+                <img [src]="event.coverUrl" [alt]="event.title">
+              }
+              <p>{{ date(event.date) }} · {{ event.time }}</p>
+            </div>
+            <div class="info">
+              <h3>{{ event.title }}</h3>
+              <span>{{ event.venue }}</span>
+            </div>
+          </a>
+        }
+      </div>
+    } @else {
+      <p class="empty">No upcoming events.</p>
+    }
+  </section>
+</div>

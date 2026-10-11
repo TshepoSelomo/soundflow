@@ -1,0 +1,62 @@
+:host { display: contents; }
+
+aside {
+  position: fixed;
+  inset: 0 auto 5rem 0;
+  width: 16rem;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  background: var(--sidebar);
+  border-right: 1px solid var(--border);
+  color: var(--sidebar-foreground);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.brand img { width: 2rem; height: 2rem; }
+
+.who { padding: 0 1.25rem 1rem; }
+.who p { margin: 0.5rem 0.5rem 0; font-size: 0.75rem; color: var(--muted); }
+
+nav, .foot { display: flex; flex-direction: column; gap: 0.2rem; padding: 0 0.75rem; }
+nav { flex: 1; }
+
+a, button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: hsl(0 0% 85% / 0.7);
+  text-decoration: none;
+  text-align: left;
+  border-radius: 0.6rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+a:hover, button:hover, a.active {
+  background: hsl(0 0% 100% / 0.06);
+  color: var(--sidebar-foreground);
+}
+
+a.active { background: hsl(0 0% 100% / 0.08); }
+
+.foot {
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.foot button:hover { color: var(--destructive); }

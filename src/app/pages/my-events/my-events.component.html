@@ -1,0 +1,48 @@
+<div class="page">
+  <header>
+    <div>
+      <h1 class="page-title"><app-icon name="events" /> My Events</h1>
+      <p>Manage your organised events</p>
+    </div>
+    <a routerLink="/create-event" class="btn"><app-icon name="plus" /> New Event</a>
+  </header>
+
+  @if (events().length) {
+    <div class="list">
+      @for (event of events(); track event.id) {
+        <article class="card">
+          @if (event.coverUrl) {
+            <img [src]="event.coverUrl" [alt]="event.title">
+          } @else {
+            <div class="thumb"></div>
+          }
+          <div class="body">
+            <div class="top">
+              <div>
+                <h3>{{ event.title }}</h3>
+                <p>{{ when(event.date, event.time, event.venue) }}</p>
+              </div>
+              <span class="badge" [class.off]="event.status !== 'upcoming'">{{ event.status }}</span>
+            </div>
+            @if (lineup(event.id).length) {
+              <div class="chips">
+                @for (row of lineup(event.id); track row.id) {
+                  <span>{{ artistName(row.artistId) }} ({{ row.status }})
+                    <button type="button" (click)="remove(row.id)" aria-label="Remove artist">×</button>
+                  </span>
+                }
+              </div>
+            }
+            @if (event.status === 'upcoming') {
+              <button type="button" class="btn btn-danger btn-sm" (click)="cancel(event.id)">
+                <app-icon name="trash" /> Cancel Event
+              </button>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <p class="empty">No events yet. Create your first one!</p>
+  }
+</div>
